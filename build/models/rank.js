@@ -23,3 +23,4 @@ class Rank {
     }
 }
 module.exports = Rank;
+//# sourceMappingURL=rank.js.map

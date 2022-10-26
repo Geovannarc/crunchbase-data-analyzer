@@ -30,7 +30,6 @@ class Company{
               if (err) {
                 console.error(err.message);
               }
-              console.log(row.name);
             });
         });
         return lists

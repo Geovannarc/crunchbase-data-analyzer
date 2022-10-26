@@ -9,3 +9,4 @@ let db = new sqlite3.Database('./db.sqlite3', (err) => {
     }
 });
 module.exports = db;
+//# sourceMappingURL=dbconnection.js.map

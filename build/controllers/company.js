@@ -9,3 +9,4 @@ listAll().then(res => {
 }).catch(e => {
     throw e.message;
 });
+//# sourceMappingURL=company.js.map

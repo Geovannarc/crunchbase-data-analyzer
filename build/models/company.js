@@ -12,10 +12,10 @@ class Company {
                 if (err) {
                     console.error(err.message);
                 }
-                console.log(row.name);
             });
         });
         return lists;
     }
 }
 module.exports = Company;
+//# sourceMappingURL=company.js.map
