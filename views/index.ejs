@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include("header") %>
     <title>Crunchbase Data Analysis</title>
+    <!DOCTYPE html>
+    <meta charset="utf-8">
+    <!-- <script> src="https://unpkg.com/chartjs-chart-geo@3.10.0/build/index.umd.min.js"</script> -->
 </head>
 <body>
-    <div class="container-fluid">
-        <h2 class="text-center padding-1">
-            Crunchbase Data Analysis
-        </h2>
+    <div id="data-geo" data-test=<%= comperc %>></div>
+    <div>
+        <h2>Crunchbase List Analysis</h2>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <div>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="public/chart_main.js">   
+    </script>
 </body>
 </html>
