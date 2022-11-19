@@ -1,7 +1,7 @@
 import * as ChartGeo from "chartjs-chart-geo";
 import Chart from 'chart.js/auto';
-import { BubbleMapController, ChoroplethController ,GeoFeature, ColorScale, SizeScale, ProjectionScale } from 'chartjs-chart-geo';
-Chart.register(BubbleMapController, ChoroplethController, GeoFeature, ColorScale, SizeScale, ProjectionScale);
+import { BubbleMapController, ChoroplethController,ColorLogarithmicScale, GeoFeature, ColorScale, SizeScale, ProjectionScale } from 'chartjs-chart-geo';
+Chart.register(BubbleMapController, ChoroplethController, ColorLogarithmicScale, GeoFeature, ColorScale, SizeScale, ProjectionScale);
 
 //grafico barras
 var data = {
@@ -51,7 +51,7 @@ var data = {
       labels: countries.map((d) => d.properties.name),
       datasets: [{
         label: 'Countries',
-        data: countries.map((d) => ({feature: d, value: comperc[d.properties.name.toLowerCase()]})),
+        data: countries.map((d) => ({feature: d, value: comperc[d.properties.name.toLowerCase().replace(/ /g, '').slice(0, 10)]})),
       }]
     },
     options: {
@@ -65,6 +65,8 @@ var data = {
       scales: {
         xy: {
           projection: 'equalEarth'
+        },color: {
+          type: 'colorLogarithmic',
         }
       }
     }
