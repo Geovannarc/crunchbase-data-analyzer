@@ -19,8 +19,24 @@ app.get('/', async (req: express.Request, res: express.Response) => {
     database : 'pinter' 
   });
   try {
-    let companies_categories = await conn.execute("SELECT * from company_category JOIN companies on company_category.company_uuid = companies.uuid JOIN categories on company_category.category_id = categories.id")
-    console.log(JSON.stringify(companies_categories[0]))
+    let companies_categories = await conn.execute("SELECT companies.name as comp_name, categories.name as cat_name, year_founded, short_description, num_employees, last_funding_type, last_funding_at, funding_stage, continent, country, region, city from company_category JOIN companies on company_category.company_uuid = companies.uuid JOIN categories on company_category.category_id = categories.id")
+    var comp_cat = JSON.parse(JSON.stringify(companies_categories[0]))
+    var comp_cat_2 = {}
+    comp_cat.forEach(row => {
+      var name = row["comp_name"]
+      var categ = row["cat_name"]
+      if (comp_cat_2[name]){
+        comp_cat_2[name]["categories"].push(categ)
+      }else {
+        delete row["cat_name"]
+        row["categories"] = [categ]
+        comp_cat_2[name] = row;
+      }
+    })
+    var values = Object.keys(comp_cat_2).map(function(key){
+      return comp_cat_2[key];
+    });
+
     let result = await conn.execute("SELECT companies.country, count(companies.uuid) FROM companies GROUP BY companies.country");
     var companies_per_country = {}
     result = JSON.parse(JSON.stringify(result[0]));
@@ -34,7 +50,7 @@ app.get('/', async (req: express.Request, res: express.Response) => {
       }
     });
     console.log(companies_per_country)
-    res.render('index.ejs', { mensagem: null, erro: null, comperc: JSON.stringify(companies_per_country)})
+    res.render('index.ejs', { mensagem: null, erro: null, comperc: JSON.stringify(companies_per_country), comp_cat: values})
   } catch (error) {
     console.log(error);
   }

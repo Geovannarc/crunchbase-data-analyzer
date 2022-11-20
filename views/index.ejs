@@ -20,6 +20,26 @@
         <canvas id="chart"></canvas>
     </div>
 
+    <table id="table" data-toggle="table" data-flat="true" data-search="true" >
+        <thead>
+          <tr>
+              <th data-field="" data-sortable="true">Company</th>
+              <th data-field="" data-sortable="true">Liefertermin</th>
+              <th data-field="" data-sortable="true">Fertigstellungstermin</th>
+              <th data-field="" data-sortable="true">Keyline Nr</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var count = 0; %>
+          <% comp_cat.forEach((company)=>{  %>
+              <tr data-index="<%= count %>">
+                  <td><%= company.comp_name %></td>
+              </tr>
+              <% count +=1; %>
+          <% }) %>
+        </tbody>
+      </table>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="public/chart_main.js">   
     </script>
