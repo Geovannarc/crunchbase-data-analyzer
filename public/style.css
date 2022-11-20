@@ -1,17 +1,69 @@
 .padding-1{
     padding: 1em;
 }
-body {  
-    background: #1D1F20;
-    padding: 16px;
-}
 canvas {
     border: 1px dotted red;
 }
 .chart-container {
-    position: relative;
-    margin: auto;
     height: 80vh;
-    width: 80vw;
 }
-  
+
+body{
+    color: white;
+    font-family: 'Noto Sans Mende Kikakui', sans-serif;
+}
+
+.block{
+    display: block;
+}
+
+.fa-2x{
+    font-size: 1.5em;
+    text-align: center;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar{
+    position: fixed;
+}
+
+@media (max-width: 600px)
+{
+    .content{
+        margin-left: 3em;
+    }
+}
+@media (min-width: 601px) and (max-width:1200px)
+{
+    .content{
+        margin-left: 8em;
+    }
+}
+@media (min-width: 1201px) 
+{
+    .content{
+        margin-left: 19em;
+    }
+}
+
+.color-white{
+    color: white;
+}
+
+.nav-link{
+    color: white;
+}
+
+.nav-link:hover{
+    color: rgb(210, 210, 210);
+}
+
+.title{
+    background-color: #ffffff0d;
+    border-radius: 10px;
+    padding: 3px;
+}
