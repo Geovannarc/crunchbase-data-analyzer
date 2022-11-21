@@ -1,4 +1,4 @@
-<div class="content">
+<div class="col-sm-10 content">
     <div class="title">
         <h1 class="text-center h3">
             Hot Tech Companies Globally
@@ -6,33 +6,22 @@
     </div>
     <div id="data-geo" data-test=<%= comperc %>>
     </div>
-      <h1 class="mt-4 mb-4 h3">Países X Num de Empresas</h1>
-      <canvas id="canvas"></canvas>
-    <div class="chart-container">
-      <h1 class="mt-4 mb-4 h3">segundo título</h1>
-      <canvas id="chart"></canvas>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2 id="locations" class="mt-4 mb-4">empresas por país</h2>
+          <canvas id="canvas"></canvas>
+        </div>
+        <div class="col-sm-4">
+          <div class="chart-container">
+            <h2 class="mt-4 mb-4">segundo título</h2>
+            <canvas id="chart"></canvas>
+        </div>
+        </div>
+      </div>
     </div>
-    <!-- <table id="table" data-toggle="table" data-flat="true" data-search="true" >
-      <thead>
-        <tr>
-            <th data-field="" data-sortable="true">Company</th>
-            <th data-field="" data-sortable="true">Liefertermin</th>
-            <th data-field="" data-sortable="true">Fertigstellungstermin</th>
-            <th data-field="" data-sortable="true">Keyline Nr</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% var count = 0; %>
-        <% comp_cat.forEach((company)=>{  %>
-            <tr data-index="<%= count %>">
-                <td><%= company.comp_name %></td>
-            </tr>
-            <% count +=1; %>
-        <% }) %>
-      </tbody>
-    </table> -->
-    <div class="mt-6">
-      <h1 class="mb-6">Top 10 empresas/mês</h1>
+    <div class="">
+      <h2 class="mt-4 mb-2">top 10 empresas/mês</h2>
       <%- include("carousel")  %> 
     </div>
 </div>
