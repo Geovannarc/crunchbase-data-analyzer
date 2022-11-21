@@ -4,15 +4,15 @@
             HOT TECH COMPANIES
         </h1>
     </div>
-    <div id="data-geo" data-test=<%= comperc %>></div>
-      <h1 class="mt-3">empresas por país</h1>
+    <div id="data-geo" data-test=<%= comperc %>>
+    </div>
+      <h1 class="mt-4 mb-4">empresas por país</h1>
       <canvas id="canvas"></canvas>
-      <div class="chart-container">
-          <h1 class="mt-3">segundo título</h1>
-          <canvas id="chart"></canvas>
-  </div>
-  
-  <table id="table" data-toggle="table" data-flat="true" data-search="true" >
+    <div class="chart-container">
+        <h1 class="mt-4 mb-4">segundo título</h1>
+        <canvas id="chart"></canvas>
+    </div>
+    <!-- <table id="table" data-toggle="table" data-flat="true" data-search="true" >
       <thead>
         <tr>
             <th data-field="" data-sortable="true">Company</th>
@@ -30,5 +30,9 @@
             <% count +=1; %>
         <% }) %>
       </tbody>
-    </table>
+    </table> -->
+    <div class="mt-6">
+      <h1 class="mb-6">Top 10 empresas/mês</h1>
+      <%- include("carousel")  %> 
+    </div>
 </div>

@@ -5,7 +5,7 @@ canvas {
     border: 1px dotted red;
 }
 .chart-container {
-    height: 80vh;
+    height: 65vh;
 }
 
 body{
@@ -66,4 +66,43 @@ body{
     background-color: #ffffff0d;
     border-radius: 10px;
     padding: 3px;
+}
+
+canvas{
+    border: 2px solid #80808024;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 576px) 
+{
+    .carousel-inner{
+        display: flex;
+    }
+    .carousel-item{
+        display: block;
+        margin-right: 0;
+        flex: 0 0 calc(100%/3);
+    }
+}
+
+.mt-6{
+    margin-top: 6em;
+}
+
+.carousel-control-prev, .carousel-control-next{
+    width: 6vh;
+    height: 6vh;
+    background-color: #ffffff16;
+    border-radius: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-item{
+    padding: 50px;
+}
+
+.active{
+    transform: none !important;
 }
