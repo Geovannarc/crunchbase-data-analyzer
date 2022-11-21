@@ -63,7 +63,6 @@ body{
 }
 
 .title{
-    background-color: #ffffff08;
     padding: 3px;
 }
 
@@ -103,9 +102,15 @@ canvas{
 }
 
 .carousel-item{
-    padding: 50px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .active{
     transform: none !important;
+}
+
+.table_w{
+    width: 200px;
 }

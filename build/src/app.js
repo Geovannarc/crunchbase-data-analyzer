@@ -34,6 +34,19 @@ app.get('/', async (req, res) => {
         var values = Object.keys(comp_cat_2).map(function (key) {
             return comp_cat_2[key];
         });
+        // let ranks = await conn.execute("SELECT companies.name as comp_name, crunchbase_rank, date_req from ranks JOIN companies on ranks.company_id = companies.uuid")
+        // var rank_comp = JSON.parse(JSON.stringify(ranks[0]))
+        // rank_comp.forEach(row => {
+        //   var name = row["comp_name"];
+        //   if (!comp_cat_2[name]["ranks"]){
+        //     delete row["comp_name"]
+        //     comp_cat_2[name]["ranks"] = [row]
+        //   }
+        //   else{
+        //     delete row["comp_name"]
+        //     comp_cat_2[name]["ranks"].push(row)
+        //   }
+        // });
         let result = await conn.execute("SELECT companies.country, count(companies.uuid) FROM companies GROUP BY companies.country");
         var companies_per_country = {};
         result = JSON.parse(JSON.stringify(result[0]));
