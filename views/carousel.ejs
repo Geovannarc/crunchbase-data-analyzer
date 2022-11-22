@@ -1,158 +1,33 @@
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item">
-        <table class="table_w table table-dark">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Company</th>
-                <th scope="col">Categories</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% var count = 0; %>
-              <% comp_cat.forEach((company)=>{  %>
-                  <tr data-index="<%= count %>">
-                      <th scope="row"><%= count %></th>
-                      <td><%= company.comp_name %></td>
-                      <td><%= company.categories %></td>
-                  </tr>
-                  <% count +=1; %>
+      <% ['August', 'September', 'October', 'November', 'December'].forEach((month) => { %>
+        <% if (top[month]){ %>
+        <div class="carousel-item">
+          <table class="table_w table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Company</th>
+                  <th scope="col">Categories</th>
+                  <th scope="col">Rank</th>
+                </tr>
+              </thead>
+              <% var count = 1; %>
+              <% top[month].forEach((comp_rank_arr) => { %>
+                <tbody>
+                      <tr data-index="<%= count %>">
+                          <th scope="row"><%= count %></th>
+                          <td><%= comp_rank_arr[0] %></td>
+                          <td style="width: 50px;"><%= comp_cat[comp_rank_arr[0]].categories %></td>
+                          <td><%= comp_rank_arr[1] %></td>
+                      </tr>
+                      <% count +=1; %>
+                </tbody>
               <% }) %>
-              </tr>
-            </tbody>
-          </table>
-      </div>
-      <div class="carousel-item">
-        <table class="table table-dark">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
-      <div class="carousel-item">
-        <table class="table table-dark table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
+            </table>
+        </div>
+        <% } %>
+      <% }) %>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

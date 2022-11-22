@@ -19,37 +19,56 @@ app.get('/', async (req: express.Request, res: express.Response) => {
     database : 'pinter' 
   });
   try {
-    let companies_categories = await conn.execute("SELECT companies.name as comp_name, categories.name as cat_name, year_founded, short_description, num_employees, last_funding_type, last_funding_at, funding_stage, continent, country, region, city from company_category JOIN companies on company_category.company_uuid = companies.uuid JOIN categories on company_category.category_id = categories.id")
-    var comp_cat = JSON.parse(JSON.stringify(companies_categories[0]))
     var comp_cat_2 = {}
+    let companies = await conn.execute("SELECT name, year_founded, short_description, num_employees, last_funding_type, last_funding_at, funding_stage, continent,country, region, city FROM companies");
+    companies = JSON.parse(JSON.stringify(companies[0]))
+    companies.forEach(row => {
+      var name = row["name"]
+      delete row["name"]
+      comp_cat_2[name] = row;
+    })
+
+    let companies_categories = await conn.execute("SELECT companies.name as comp_name, categories.name as cat_name from company_category JOIN companies on company_category.company_uuid = companies.uuid JOIN categories on company_category.category_id = categories.id");
+    var comp_cat = JSON.parse(JSON.stringify(companies_categories[0]))
     comp_cat.forEach(row => {
       var name = row["comp_name"]
       var categ = row["cat_name"]
-      if (comp_cat_2[name]){
+      if (comp_cat_2[name]["categories"]){
         comp_cat_2[name]["categories"].push(categ)
       }else {
-        delete row["cat_name"]
-        row["categories"] = [categ]
-        comp_cat_2[name] = row;
+        comp_cat_2[name]["categories"] = [categ]
+        comp_cat_2[name]["comp_name"] = name
       }
     })
+
     var values = Object.keys(comp_cat_2).map(function(key){
       return comp_cat_2[key];
     });
 
-    // let ranks = await conn.execute("SELECT companies.name as comp_name, crunchbase_rank, date_req from ranks JOIN companies on ranks.company_id = companies.uuid")
-    // var rank_comp = JSON.parse(JSON.stringify(ranks[0]))
-    // rank_comp.forEach(row => {
-    //   var name = row["comp_name"];
-    //   if (!comp_cat_2[name]["ranks"]){
-    //     delete row["comp_name"]
-    //     comp_cat_2[name]["ranks"] = [row]
-    //   }
-    //   else{
-    //     delete row["comp_name"]
-    //     comp_cat_2[name]["ranks"].push(row)
-    //   }
-    // });
+    var meses = {
+      8: "August",
+      9: "September",
+      10: "October",
+      11: "November",
+      12: "December"
+    }
+    var top_10_month = {}
+    for (let mes = 8; mes < 13; mes++) {
+      let rank_month = await conn.execute(`
+      SELECT companies.name as comp_name, MIN(crunchbase_rank) as cbr from ranks JOIN companies on ranks.company_id = companies.uuid
+		    WHERE MONTH(date_req) = ?
+		    GROUP BY companies.name
+        ORDER BY MIN(crunchbase_rank)`, [mes]);
+      rank_month = JSON.parse(JSON.stringify(rank_month[0]))
+      rank_month.forEach(row => {
+        if (!top_10_month[meses[mes]]){
+          top_10_month[meses[mes]] = [[row["comp_name"], row["cbr"]]]
+        } else {
+          if (top_10_month[meses[mes]].length < 11)
+          top_10_month[meses[mes]].push([row["comp_name"], row["cbr"]])
+        }
+      })
+    }
 
     let result = await conn.execute("SELECT companies.country, count(companies.uuid) FROM companies GROUP BY companies.country");
     var companies_per_country = {}
@@ -63,8 +82,7 @@ app.get('/', async (req: express.Request, res: express.Response) => {
         companies_per_country[row['country'].replace(/ /g, '').toLowerCase().slice(0, 10)] = row['count(companies.uuid)'];
       }
     });
-    console.log(companies_per_country)
-    res.render('index.ejs', { mensagem: null, erro: null, comperc: JSON.stringify(companies_per_country), comp_cat: values})
+    res.render('index.ejs', { mensagem: null, erro: null, comperc: JSON.stringify(companies_per_country), comp_cat: comp_cat_2, top: top_10_month})
   } catch (error) {
     console.log(error);
   }
