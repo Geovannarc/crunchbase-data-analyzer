@@ -112,3 +112,17 @@ canvas{
 .table_w{
     width: 200px;
 }
+
+.top-card{
+    border: 2px solid #80808024;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.p-2{
+    padding: 1em !important;
+}
+
+.v-align{
+    vertical-align: text-bottom;
+}
