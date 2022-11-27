@@ -17,14 +17,17 @@ app.get('/', async (req, res) => {
     });
     try {
         var comp_cat_2 = {};
-        let companies = await conn.execute("SELECT name, year_founded, short_description, num_employees, last_funding_type, last_funding_at, funding_stage, continent,country, region, city FROM companies");
+        let companies = await conn.execute(`SELECT name, year_founded, short_description, num_employees,
+     last_funding_type, last_funding_at, funding_stage, continent,country, region, city FROM companies`);
         companies = JSON.parse(JSON.stringify(companies[0]));
         companies.forEach(row => {
             var name = row["name"];
             delete row["name"];
             comp_cat_2[name] = row;
         });
-        let companies_categories = await conn.execute("SELECT companies.name as comp_name, categories.name as cat_name from company_category JOIN companies on company_category.company_uuid = companies.uuid JOIN categories on company_category.category_id = categories.id");
+        let companies_categories = await conn.execute(`SELECT companies.name as comp_name, categories.name as cat_name
+     from company_category JOIN companies on company_category.company_uuid = companies.uuid
+      JOIN categories on company_category.category_id = categories.id`);
         var comp_cat = JSON.parse(JSON.stringify(companies_categories[0]));
         comp_cat.forEach(row => {
             var name = row["comp_name"];
@@ -36,9 +39,6 @@ app.get('/', async (req, res) => {
                 comp_cat_2[name]["categories"] = [categ];
                 comp_cat_2[name]["comp_name"] = name;
             }
-        });
-        var values = Object.keys(comp_cat_2).map(function (key) {
-            return comp_cat_2[key];
         });
         var meses = {
             8: "August",
@@ -60,7 +60,7 @@ app.get('/', async (req, res) => {
                     top_10_month[meses[mes]] = [[row["comp_name"], row["cbr"]]];
                 }
                 else {
-                    if (top_10_month[meses[mes]].length < 11)
+                    if (top_10_month[meses[mes]].length < 10)
                         top_10_month[meses[mes]].push([row["comp_name"], row["cbr"]]);
                 }
             });
@@ -77,6 +77,21 @@ app.get('/', async (req, res) => {
                 companies_per_country[row['country'].replace(/ /g, '').toLowerCase().slice(0, 10)] = row['count(companies.uuid)'];
             }
         });
+        let sims = await conn.execute(`select c1.name as c1_name, c2.name as c2_name, score from similars
+                join companies as c1 on c1.uuid = similars.company_1_uuid
+                join companies as c2 on c2.uuid = similars.company_2_uuid;`);
+        sims = JSON.parse(JSON.stringify(sims[0]));
+        sims.forEach(sim => {
+            if (comp_cat_2[sim["c1_name"]] != null) {
+                if (comp_cat_2[sim["c1_name"]]["similarities"] == null) {
+                    comp_cat_2[sim["c1_name"]]["similarities"] = [[sim["c2_name"], sim["score"]]];
+                }
+                else {
+                    comp_cat_2[sim["c1_name"]]["similarities"].push([sim["c2_name"], sim["score"]]);
+                }
+            }
+        });
+        
         res.render('index.ejs', { mensagem: null, erro: null, comperc: JSON.stringify(companies_per_country), comp_cat: comp_cat_2, top: top_10_month });
     }
     catch (error) {

@@ -51,7 +51,10 @@ var data = {
       labels: countries.map((d) => d.properties.name),
       datasets: [{
         label: 'Countries',
-        data: countries.map((d) => ({feature: d, value: comperc[d.properties.name.toLowerCase().replace(/ /g, '').slice(0, 10)]})),
+        data: countries.map((d) => ({
+          feature: d,
+          value: comperc[d.properties.name.toLowerCase().replace(/ /g, '').slice(0, 10)] == null ? 0 : comperc[d.properties.name.toLowerCase().replace(/ /g, '').slice(0, 10)]
+        })),
       }]
     },
     options: {
