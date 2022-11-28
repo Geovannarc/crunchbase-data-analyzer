@@ -75,17 +75,12 @@
           <div class="row p-3">
             <% for (const [key, value] of Object.entries(comp_cat)) { %>
               <% if (comp_cat[key]["similarities"] != null) { %>
-                <div class="my_border">
+                <div class="my_border" style="display: none;" id="<%= key %>">
                   <div class="p-3">
                     <h4><%= key %></h4>
                     <h4>Categories: <%= comp_cat[key].categories%></h4>
                   </div>
-                  <% if (comp_cat[key]["similarities"].length >= 2) { %>
                     <div class="row" style="justify-content: space-evenly;">
-                  <% } %>
-                  <% if (comp_cat[key]["similarities"].length == 1) { %>
-                    <div class="row" style="justify-content: start;"></div>
-                  <% } %>
                       <% comp_cat[key]["similarities"].forEach((sim) => { %>
                         <div class="col-md-3 my_border p-2 m-2">
                           <div class="row"><%= sim[0] %></div>
@@ -103,9 +98,17 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
+      var id_comp = ""
+      var activated = null;
+
       $(document).ready(function () {
-        $('.dropdown-menu li a').on('click', function () {
-          var txt= ($(this).text());
+        $('.dropdown-item').on('click', function () {
+          if (activated != null) {
+            activated.style["display"] = "none";
+          }
+          id_comp= ($(this).text());
+          activated = document.getElementById(id_comp);
+          activated.style["display"] = "contents";
         });
       });
     </script>
