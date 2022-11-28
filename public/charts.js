@@ -4,8 +4,16 @@ import { BubbleMapController, ChoroplethController,ColorLogarithmicScale, GeoFea
 Chart.register(BubbleMapController, ChoroplethController, ColorLogarithmicScale, GeoFeature, ColorScale, SizeScale, ProjectionScale);
 
 //grafico barras
+var years_all = JSON.parse(document.getElementById('data-years').dataset.test)
+var years = []
+var vals = []
+for (const [key, value] of Object.entries(years_all)) {
+  years.push(key)
+  vals.push(value)
+}
+
 var data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    labels: years,
     datasets: [{
         label: "Dataset #1",
         backgroundColor: "rgba(255,99,132,0.2)",
@@ -13,7 +21,7 @@ var data = {
         borderWidth: 2,
         hoverBackgroundColor: "rgba(255,99,132,0.4)",
         hoverBorderColor: "rgba(255,99,132,1)",
-        data: [65, 59, 20, 81, 56, 55, 40],
+        data: vals,
     }]
     };
     var options = {

@@ -78,21 +78,38 @@ app.get('/', async (req, res) => {
             }
         });
         let sims = await conn.execute(`select c1.name as c1_name, c2.name as c2_name, score from similars
-                join companies as c1 on c1.uuid = similars.company_1_uuid
-                join companies as c2 on c2.uuid = similars.company_2_uuid;`);
+    join companies as c1 on c1.uuid = similars.company_1_uuid
+    join companies as c2 on c2.uuid = similars.company_2_uuid;`);
         sims = JSON.parse(JSON.stringify(sims[0]));
+        let cn_name = ["c1_name", "c2_name"];
         sims.forEach(sim => {
-            if (comp_cat_2[sim["c1_name"]] != null) {
-                if (comp_cat_2[sim["c1_name"]]["similarities"] == null) {
-                    comp_cat_2[sim["c1_name"]]["similarities"] = [[sim["c2_name"], sim["score"]]];
+            cn_name.forEach(company => {
+                if (comp_cat[sim[company]] != null) {
+                    let cn = company == cn_name[0] ? cn_name[1] : cn_name[0];
+                    if (comp_cat[sim[company]]["similarities"] == null) {
+                        comp_cat[sim[company]]["similarities"] = [sim[cn]];
+                    }
+                    else {
+                        comp_cat[sim[company]]["similarities"].push(sim[cn]);
+                    }
+                }
+            });
+        });
+        var years = {};
+        for (const [key, value] of Object.entries(comp_cat_2)) {
+            let year = comp_cat_2[key]["year_founded"];
+            if (year != null) {
+                if (years[year] == null) {
+                    years[year] = 1;
                 }
                 else {
-                    comp_cat_2[sim["c1_name"]]["similarities"].push([sim["c2_name"], sim["score"]]);
+                    years[year] += 1;
                 }
             }
-        });
-        
-        res.render('index.ejs', { mensagem: null, erro: null, comperc: JSON.stringify(companies_per_country), comp_cat: comp_cat_2, top: top_10_month });
+        }
+        res.render('index.ejs', { mensagem: null, erro: null,
+            comperc: JSON.stringify(companies_per_country), comp_cat: comp_cat_2,
+            top: top_10_month, years: JSON.stringify(years) });
     }
     catch (error) {
         console.log(error);

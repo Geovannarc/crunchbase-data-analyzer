@@ -82,7 +82,7 @@ app.get('/', async (req: express.Request, res: express.Response) => {
       }
     });
 
-    let sims = await conn.execute(`select c1.name as c1_name, c2.name as c2_name, core from similars
+    let sims = await conn.execute(`select c1.name as c1_name, c2.name as c2_name, score from similars
     join companies as c1 on c1.uuid = similars.company_1_uuid
     join companies as c2 on c2.uuid = similars.company_2_uuid;`)
     sims = JSON.parse(JSON.stringify(sims[0]));
@@ -100,8 +100,22 @@ app.get('/', async (req: express.Request, res: express.Response) => {
         }
       });
     })
-    console.log("a")
-    res.render('index.ejs', { mensagem: null, erro: null, comperc: JSON.stringify(companies_per_country), comp_cat: comp_cat_2, top: top_10_month})
+
+    var years = {}
+    for (const [key, value] of Object.entries(comp_cat_2)) {
+      let year = comp_cat_2[key]["year_founded"]
+      if (year != null){
+        if(years[year] == null) {
+          years[year] = 1
+        } else {
+          years[year] += 1
+        }
+      }
+    }
+
+    res.render('index.ejs', { mensagem: null, erro: null,
+              comperc: JSON.stringify(companies_per_country), comp_cat: comp_cat_2,
+              top: top_10_month, years: JSON.stringify(years)})
   } catch (error) {
     console.log(error);
   }

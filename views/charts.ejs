@@ -3,6 +3,7 @@
       Hot Tech Companies Globally
     </div>
     <div id="data-geo" data-test=<%= comperc %>>
+    <div id="data-years" data-test=<%= years %>>
     </div>
     <div class="container-fluid">
       <div class="row mt-1">
@@ -39,7 +40,7 @@
       </div>
       <div class="row">
         <div class="col-sm-8">
-          <div class="my_border px-3">
+          <div class="my_border p-3">
             <h5 class="mt-4 mb-2">Company Count by Country</h5>
             <div>
               <canvas id="canvas"></canvas>
@@ -47,10 +48,12 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="chart-container">
-            <h5 class="mt-4 mb-2">Company Year Founded</h5>
-              <canvas id="chart"></canvas>
-        </div>
+          <div class="my_border p-2">
+            <div class="chart-container">
+              <h5 class="mt-4 mb-2">No. Companies / Year Founded</h5>
+                <canvas id="chart"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>
