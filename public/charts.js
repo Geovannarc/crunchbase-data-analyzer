@@ -15,7 +15,7 @@ for (const [key, value] of Object.entries(years_all)) {
 var data = {
     labels: years,
     datasets: [{
-        label: "Dataset #1",
+        label: "Contagem",
         backgroundColor: "rgba(255,99,132,0.2)",
         borderColor: "rgba(255,99,132,1)",
         borderWidth: 2,
