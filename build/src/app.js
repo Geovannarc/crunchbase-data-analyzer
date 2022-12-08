@@ -81,19 +81,18 @@ app.get('/', async (req, res) => {
     join companies as c1 on c1.uuid = similars.company_1_uuid
     join companies as c2 on c2.uuid = similars.company_2_uuid;`);
         sims = JSON.parse(JSON.stringify(sims[0]));
-        let cn_name = ["c1_name", "c2_name"];
         sims.forEach(sim => {
-            cn_name.forEach(company => {
-                if (comp_cat[sim[company]] != null) {
-                    let cn = company == cn_name[0] ? cn_name[1] : cn_name[0];
-                    if (comp_cat[sim[company]]["similarities"] == null) {
-                        comp_cat[sim[company]]["similarities"] = [sim[cn]];
-                    }
-                    else {
-                        comp_cat[sim[company]]["similarities"].push(sim[cn]);
-                    }
+            let nome_1 = sim["c1_name"];
+            let nome_2 = sim["c2_name"];
+            let score = sim["score"];
+            if (comp_cat_2[nome_1] != null) {
+                if (comp_cat_2[nome_1]["similarities"] == null) {
+                    comp_cat_2[nome_1]["similarities"] = [[nome_2, score]];
                 }
-            });
+                else {
+                    comp_cat_2[nome_1]["similarities"].push([nome_2, score]);
+                }
+            }
         });
         var years = {};
         for (const [key, value] of Object.entries(comp_cat_2)) {

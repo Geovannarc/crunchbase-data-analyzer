@@ -87,18 +87,17 @@ app.get('/', async (req: express.Request, res: express.Response) => {
     join companies as c2 on c2.uuid = similars.company_2_uuid;`)
     sims = JSON.parse(JSON.stringify(sims[0]));
 
-    let cn_name = ["c1_name", "c2_name"]
     sims.forEach(sim => {
-      cn_name.forEach(company => {
-        if (comp_cat[sim[company]] != null){
-          let cn = company == cn_name[0] ? cn_name[1] : cn_name[0]
-          if (comp_cat[sim[company]]["similarities"] == null) {
-            comp_cat[sim[company]]["similarities"] = [sim[cn]]
+        let nome_1 = sim["c1_name"];
+        let nome_2 = sim["c2_name"];
+        let score = sim["score"];
+        if (comp_cat_2[nome_1] != null){
+          if (comp_cat_2[nome_1]["similarities"] == null) {
+            comp_cat_2[nome_1]["similarities"] = [[nome_2, score]]
           } else {
-            comp_cat[sim[company]]["similarities"].push(sim[cn])
+            comp_cat_2[nome_1]["similarities"].push([nome_2, score])
           }
         }
-      });
     })
 
     var years = {}
@@ -116,9 +115,9 @@ app.get('/', async (req: express.Request, res: express.Response) => {
     res.render('index.ejs', { mensagem: null, erro: null,
               comperc: JSON.stringify(companies_per_country), comp_cat: comp_cat_2,
               top: top_10_month, years: JSON.stringify(years)})
-  } catch (error) {
-    console.log(error);
-  }
+    } catch (error) {
+      console.log(error);
+    }
 });
 
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {

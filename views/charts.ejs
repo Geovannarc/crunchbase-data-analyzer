@@ -74,18 +74,20 @@
           </ul>
           <div class="row p-3">
             <% for (const [key, value] of Object.entries(comp_cat)) { %>
-              <% if (comp_cat[key]["similarities"] != null) { %>
+              <% if (value["similarities"] != null) { %>
                 <div class="my_border" style="display: none;" id="<%= key %>">
                   <div class="p-3">
                     <h4><%= key %></h4>
-                    <h4>Categories: <%= comp_cat[key].categories%></h4>
+                    <h4>Categories: <%= comp_cat[key].categories %></h4>
                   </div>
                     <div class="row" style="justify-content: space-evenly;">
-                      <% comp_cat[key]["similarities"].forEach((sim) => { %>
+                      <% value["similarities"].forEach((sim) => { %>
                         <div class="col-md-3 my_border p-2 m-2">
-                          <div class="row"><%= sim[0] %></div>
+                          <div class="row"><%= sim %></div>
                           <div class="row"><%= sim[1] %></div>
+                          <% if (comp_cat[sim[0]] != null) { %>
                           <div class="row"><%= comp_cat[sim[0]].categories %></div>
+                          <% } %>
                         </div>
                       <% }) %>
                     </div>
