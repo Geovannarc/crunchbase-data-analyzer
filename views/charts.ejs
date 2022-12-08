@@ -39,7 +39,7 @@
         <div class="col-sm-8">
           <div class="my_border p-2" style="height: 100%;">
             <h5 class="mb-2">Company Count by Country</h5>
-            <div>
+            <div id="locations">
               <canvas id="canvas"></canvas>
             </div> 
           </div>
@@ -55,13 +55,13 @@
       </div>
     </div>
     <div>
-      <h4 class="mt-5 pb-3" style="margin-left: 1rem;">Top 10 / Month</h4>
+      <h4 class="mt-5 pb-3" id="top10" style="margin-left: 1rem;">Top 10 / Month</h4>
       <%- include("carousel")  %> 
     </div>
-    <div style="margin-left: 1rem;" class="my-3">
+    <div style="margin-left: 1rem;" class="my-3" id="categories">
       <div class="row py-3">
         <div class="dropdown my_border p-3">
-          <h5 class="mb-3">Companies with similarities</h5>
+          <h4 class="mb-3">Companies with similarities</h4>
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Choose the Company
           </button>
@@ -82,9 +82,14 @@
                   </div>
                     <div class="row" style="justify-content: space-evenly;">
                       <% value["similarities"].forEach((sim) => { %>
-                        <div class="col-md-3 my_border p-2 m-2">
-                          <div class="row"><%= sim[0] %></div>
-                          <div class="row"><%= sim[1] %></div>
+                        <div class="col-md-3 my_border p-5 m-2">
+                          <div class="row" style="font-size: 1.3em;">
+                            <%= sim[0] %>
+                          </div>
+                          <div class="row">
+                            Score:
+                            <%= sim[1] %>
+                          </div>
                           <% if (comp_cat[sim[0]] != null) { %>
                           <div class="row"><%= comp_cat[sim[0]].categories %></div>
                           <% } %>
