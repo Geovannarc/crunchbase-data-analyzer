@@ -7,9 +7,13 @@ const app = express();
 const port = 3000;
 
 app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 app.use("/public", express.static(path.join(__dirname, '../../public')));
+
+app.get('/home', function(req, res) {
+  res.render("home.ejs", {res: res}); 
+})
 
 app.get('/', async (req: express.Request, res: express.Response) => {
   var conn = await mysql.createConnection({
