@@ -30,7 +30,7 @@
               Current #1 Company 
             </h6>
             <h5>
-              Chargezoom
+              PhotoRoom
             </h5>
           </div>
         </div>
@@ -68,7 +68,7 @@
           <ul class="dropdown-menu">
             <% for (const [key, value] of Object.entries(comp_cat)) { %>
               <% if (comp_cat[key]["similarities"] != null) { %>
-                <li><a class="dropdown-item"><%= key %></a></li>
+                <li><a class="dropdown-item simss"><%= key %></a></li>
               <% } %>
             <% } %>
           </ul>
@@ -104,7 +104,7 @@
       var activated = null;
 
       $(document).ready(function () {
-        $('.dropdown-item').on('click', function () {
+        $('.simss').on('click', function () {
           if (activated != null) {
             activated.style["display"] = "none";
           }
