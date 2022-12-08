@@ -173,25 +173,20 @@ canvas{
 }
 
 .header{
-    padding: 17em 10em 17em 10em;
+    padding: 6em 10em 6em 10em;
     background-image: url('../public/img/chart.jpg');
     background-size: cover;
     position: relative;
 }
 
-.box{
-    position: relative;
-    margin-top: -60px;
-}
-
 .box1{
     background-color: #1ff792e1;
-    padding: 4em;
+    padding: 2em;
 }
 
 .box2{
     background-color: #22262a;
-    padding: 4em;
+    padding: 2em;
 }
 
 .p-6{
@@ -202,6 +197,10 @@ canvas{
     font-size: 1.2em;
     width: 30%;
     background-color: #1ff792e1;
+}
+.btn-d{
+    font-size: 1.2em;
+    width: 30%;
 }
 
 a{

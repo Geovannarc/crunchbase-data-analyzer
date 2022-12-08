@@ -87,7 +87,7 @@ app.get('/', async (req, res) => {
         sims.forEach(sim => {
             let nome_1 = sim["c1_name"];
             let nome_2 = sim["c2_name"];
-            let score = sim["score"];
+            let score = sim["score"].toFixed(3);
             if (comp_cat_2[nome_1] != null) {
                 if (comp_cat_2[nome_1]["similarities"] == null) {
                     comp_cat_2[nome_1]["similarities"] = [[nome_2, score]];

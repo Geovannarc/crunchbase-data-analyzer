@@ -91,7 +91,10 @@
                             <%= sim[1] %>
                           </div>
                           <% if (comp_cat[sim[0]] != null) { %>
-                          <div class="row"><%= comp_cat[sim[0]].categories %></div>
+                          
+                          <div class="row py-2">Categories:
+                            <%= comp_cat[sim[0]].categories %>
+                          </div>
                           <% } %>
                         </div>
                       <% }) %>
