@@ -2,39 +2,39 @@
     <div class="carousel-inner">
       <% ['August', 'September', 'October', 'November', 'December'].forEach((month) => { %>
         <% if (top[month]){ %>
-        <div class="carousel-item">
-          <div class="my_border px-3">
-            <div style="text-align: center;" class="h4 pb-2 pt-4">
-              <%= month %>
-            </div>
-            <table class="table_w table table-dark">
-                <thead>
-                  <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Company</th>
-                    <th scope="col">Categories</th>
-                    <th scope="col">CBRank</th>
-                  </tr>
-                </thead>
-                <% var count = 1; %>
-                <% top[month].forEach((comp_rank_arr) => { %>
-                  <tbody>
-                        <tr data-index="<%= count %>">
-                            <th scope="row"><%= count %></th>
-                            <td><%= comp_rank_arr[0] %></td>
-                            <td class="categories_txt">
-                              <div style="width: 200px; overflow-wrap: break-word;">
-                                <% comp_cat[comp_rank_arr[0]].categories.forEach((cat) => { %>
-                                  <%= cat %>,<br>
-                              </div>            
-                                <% }) %>
-                            </td>
-                            <td><%= comp_rank_arr[1] %></td>
-                        </tr>
-                        <% count +=1; %>
-                  </tbody>
-                <% }) %>
-            </table>
+        <div class="my_border mx-3 carousel-wrapper">
+          <div class="carousel-item">
+              <div style="text-align: center;" class="h4 pb-2 pt-4">
+                <%= month %>
+              </div>
+              <table class="table_w table table-dark">
+                  <thead>
+                    <tr>
+                      <th scope="col">Rank</th>
+                      <th scope="col">Company</th>
+                      <th scope="col">Categories</th>
+                      <th scope="col">CBRank</th>
+                    </tr>
+                  </thead>
+                  <% var count = 1; %>
+                  <% top[month].forEach((comp_rank_arr) => { %>
+                    <tbody>
+                          <tr data-index="<%= count %>">
+                              <th scope="row"><%= count %></th>
+                              <td><%= comp_rank_arr[0] %></td>
+                              <td class="categories_txt">
+                                <div style="width: 200px; overflow-wrap: break-word;">
+                                  <% comp_cat[comp_rank_arr[0]].categories.forEach((cat) => { %>
+                                    <%= cat %>,<br>
+                                </div>            
+                                  <% }) %>
+                              </td>
+                              <td><%= comp_rank_arr[1] %></td>
+                          </tr>
+                          <% count +=1; %>
+                    </tbody>
+                  <% }) %>
+              </table>
           </div>
         </div>
         <% } %>
