@@ -83,7 +83,7 @@
                     <div class="row" style="justify-content: space-evenly;">
                       <% value["similarities"].forEach((sim) => { %>
                         <div class="col-md-3 my_border p-2 m-2">
-                          <div class="row"><%= sim %></div>
+                          <div class="row"><%= sim[0] %></div>
                           <div class="row"><%= sim[1] %></div>
                           <% if (comp_cat[sim[0]] != null) { %>
                           <div class="row"><%= comp_cat[sim[0]].categories %></div>
