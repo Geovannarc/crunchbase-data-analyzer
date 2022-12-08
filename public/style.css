@@ -12,6 +12,10 @@ h5 {
     font-family: alex2;
 }
 
+.categories_txt {
+    font-size: 13px;
+}
+
 .padding-1{
     padding: 1em;
 }
@@ -98,6 +102,17 @@ canvas{
 .my_border{
     border: 2px solid #80808024;
     border-radius: 10px;
+    -webkit-transition: border 300ms linear;
+    -ms-transition: border 300ms linear;
+    transition: border 300ms linear;
+}
+
+.my_border:hover{
+    border: 2px solid #1ff792e1;
+    border-radius: 10px;
+    -webkit-transition: border 1000ms linear;
+    -ms-transition: border 1000ms linear;
+    transition: border 1000ms linear;
 }
 
 @media screen and (min-width: 576px) 
@@ -125,11 +140,17 @@ canvas{
     transform: translateY(-50%);
 }
 
+
 .carousel-item{
     padding-top: 10px;
     padding-right: 30px;
     padding-left: 1rem;
 }
+
+/* .carousel-item:hover{
+
+} */
+
 
 .active{
     transform: none !important;
@@ -140,9 +161,7 @@ canvas{
 }
 
 .top-card{
-    border: 2px solid #80808024;
-    padding: 0.8em;
-    border-radius: 10px;
+    padding: 0.5em;
 }
 
 .p-2{
